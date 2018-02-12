@@ -12,10 +12,11 @@ module.exports = {
   dev: {
     host: 'localhost',
     port: 8081,
-    autoOpenBrowser: true,
+    autoOpenBrowser: false,
     errorOverlay: true,
     assetsPublicPath: '/',
     proxyTable: {},
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
+    notifyOnErrors: true,
   },
 }

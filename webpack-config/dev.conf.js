@@ -1,9 +1,12 @@
+const portfinder = require('portfinder')
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const config = require('./cofig')
+const utils = require('./utils')
 
-const HOST = 'localhost'
-const PORT = 8081
+const HOST = process.env.HOST
+const PORT = process.env.PORT && Number(process.env.PORT)
 
-module.exports = {
+const devWebpackConfig = {
   entry: require('./public/entry'),
 
   output: require('./public/output'),
@@ -35,3 +38,30 @@ module.exports = {
     }
   },
 }
+
+
+module.exports = new Promise((resolve, reject) => {
+  portfinder.basePort = PORT || config.dev.port
+  portfinder.getPort((err, port) => {
+    if (err) {
+      reject(err)
+    } else {
+      // publish the new Port, necessary for e2e tests
+      process.env.PORT = port
+      // add port to devServer config
+      devWebpackConfig.devServer.port = port
+
+      // Add FriendlyErrorsPlugin
+      devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
+        compilationSuccessInfo: {
+          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
+        },
+        onErrors: config.dev.notifyOnErrors
+        ? utils.createNotifierCallback()
+        : undefined
+      }))
+
+      resolve(devWebpackConfig)
+    }
+  })
+})

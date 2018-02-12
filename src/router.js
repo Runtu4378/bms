@@ -1,29 +1,31 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import utils from './common/utils'
-import Counter from './routes/index.vue'
+
+const { wrapRoutes, setTitle } = utils
 
 Vue.use(VueRouter)
-
-const Foo = { template: '<div>foo</div>' }
 
 const routes = [
   {
     path: '/',
     title: '主页',
-    component: Foo,
+    component: () => import('@routes/index.vue'),
+    // children: [
+    // ],
   },
 ]
 
 const router = new VueRouter({
   mode: 'history',
-  routes,
+  // routes: [],
+  routes: wrapRoutes(routes),
 })
 
 router.afterEach(transition => {
   router.options.routes.forEach(ele => {
     if (ele.name === transition.name) {
-      utils.setTitle(ele.title)
+      setTitle(ele.title)
     }
   })
 })
