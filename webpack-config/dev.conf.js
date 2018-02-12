@@ -12,6 +12,8 @@ module.exports = {
 
   plugins: require('./public/plugins'),
 
+  resolve: require('./public/resolve'),
+
   devtool: 'inline-source-map',
 
   devServer: {
