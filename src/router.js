@@ -1,10 +1,7 @@
-import Vue from 'vue'
 import VueRouter from 'vue-router'
 import utils from './common/utils'
 
 const { wrapRoutes, setTitle } = utils
-
-Vue.use(VueRouter)
 
 const routes = [
   {

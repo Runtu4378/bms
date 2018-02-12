@@ -14,6 +14,35 @@ module.exports = {
         ],
       },
     },
-    { test: /\.vue$/, loader: 'vue-loader' }
-  ]
+    {
+      test: /iview\/.*?js$/,
+      loader: 'babel-loader'
+    },
+    {
+      test: /\.vue$/,
+      use: [
+        {
+          loader: 'vue-loader',
+        },
+        {
+          loader: 'iview-loader',
+          options: {
+              prefix: false
+          }
+        }
+      ],
+    },
+    {
+      test: /\.css$/,
+      use: [
+        'style-loader',
+        'css-loader?minimize',
+        'autoprefixer-loader',
+      ],
+    },
+    {
+      test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+      loader: 'url-loader?limit=1024'
+    },
+  ],
 }

@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const path = require('path')
 const config = require('../cofig')
@@ -28,4 +29,7 @@ module.exports = [
     verbose: true,
     dry: false,
   }),
+
+  /* 抽取出chunk的css */
+  new ExtractTextPlugin('[name]/styles.css'),
 ]
