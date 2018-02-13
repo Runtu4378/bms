@@ -28,7 +28,7 @@
     computed: mapGetters([
     ]),
     methods: mapActions([
-    ])
+    ]),
   }
 </script>
 

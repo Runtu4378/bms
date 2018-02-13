@@ -1,5 +1,17 @@
+const config = require('../cofig')
+
 module.exports = {
   rules: [
+    {
+      test: /\.(js|vue)$/,
+      loader: 'eslint-loader',
+      enforce: 'pre',
+      include: [config.srcRootDir],
+      options: {
+        formatter: require('eslint-friendly-formatter'),
+        emitWarning: !config.dev.showEslintErrorsInOverlay
+      }
+    },
     {
       test: /\.js$/,
       exclude: /node_modules/,

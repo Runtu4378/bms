@@ -18,5 +18,6 @@ module.exports = {
     proxyTable: {},
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
     notifyOnErrors: true,
+    showEslintErrorsInOverlay: true,
   },
 }

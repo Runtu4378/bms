@@ -14,19 +14,19 @@ const store = new Vuex.Store({
   state,
   getters,
   actions,
-  mutations
+  mutations,
 })
 
 if (module.hot) {
   module.hot.accept([
     './getters',
     './actions',
-    './mutations'
+    './mutations',
   ], () => {
     store.hotUpdate({
       getters: require('./getters'),
       actions: require('./actions'),
-      mutations: require('./mutations')
+      mutations: require('./mutations'),
     })
   })
 }
