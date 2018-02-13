@@ -6,5 +6,6 @@ module.exports = {
   alias: {
     'vue': 'vue/dist/vue.common.js',
     '@routes': path.resolve(config.srcRootDir, './routes'),
-  }
+    '@utils': path.resolve(config.srcRootDir, 'utils'),
+  },
 }

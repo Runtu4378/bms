@@ -1,17 +1,17 @@
 import VueRouter from 'vue-router'
-import utils from './common/utils'
+import utils from '@utils/func'
 
 const { wrapRoutes, setTitle } = utils
 
 const routes = [
   {
     path: '/',
-    title: '主页',
+    name: '主页',
     component: () => import('@routes/index.vue'),
     children: [
       {
         path: '/book',
-        title: '图书列表',
+        name: '图书列表',
         component: () => import('@routes/book/index'),
       },
     ],
@@ -25,11 +25,7 @@ const router = new VueRouter({
 })
 
 router.afterEach(transition => {
-  router.options.routes.forEach(ele => {
-    if (ele.name === transition.name) {
-      setTitle(ele.title)
-    }
-  })
+  setTitle(transition.name)
 })
 
 export default router

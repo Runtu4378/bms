@@ -35,6 +35,22 @@ module.exports = {
       use: [
         {
           loader: 'vue-loader',
+          options: {
+            loaders: {
+              js: {
+                loader: 'babel-loader',
+                options: {
+                  presets: [
+                    ['env', { modules: false }],
+                    'stage-0',
+                  ],
+                  'plugins': [
+                    'transform-runtime',
+                  ],
+                },
+              },
+            },
+          },
         },
         {
           loader: 'iview-loader',

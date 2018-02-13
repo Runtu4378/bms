@@ -1,4 +1,6 @@
 // https://eslint.org/docs/user-guide/configuring
+const env = 'development'
+const switcher = env === 'production' ? 'error' : "off"
 
 module.exports = {
   root: true,
@@ -29,8 +31,8 @@ module.exports = {
     'quotes': ["error", "single"],
     'semi': ["error", "never"],
     // allow debugger during development
-    'no-console':  'error',
-    'no-debugger': 'error',
+    'no-console':  switcher,
+    'no-debugger': switcher,
     'comma-dangle': ['error', 'always-multiline'],
   },
 }
