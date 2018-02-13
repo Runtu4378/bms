@@ -9,8 +9,8 @@ module.exports = {
       include: [config.srcRootDir],
       options: {
         formatter: require('eslint-friendly-formatter'),
-        emitWarning: !config.dev.showEslintErrorsInOverlay
-      }
+        emitWarning: !config.dev.showEslintErrorsInOverlay,
+      },
     },
     {
       test: /\.js$/,
@@ -21,14 +21,14 @@ module.exports = {
           ['env', { modules: false }],
           'stage-0',
         ],
-        "plugins": [
-          "transform-runtime",
+        'plugins': [
+          'transform-runtime',
         ],
       },
     },
     {
       test: /iview\/.*?js$/,
-      loader: 'babel-loader'
+      loader: 'babel-loader',
     },
     {
       test: /\.vue$/,
@@ -39,9 +39,9 @@ module.exports = {
         {
           loader: 'iview-loader',
           options: {
-              prefix: false
-          }
-        }
+            prefix: false,
+          },
+        },
       ],
     },
     {
@@ -54,7 +54,7 @@ module.exports = {
     },
     {
       test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
-      loader: 'url-loader?limit=1024'
+      loader: 'url-loader?limit=1024',
     },
   ],
 }

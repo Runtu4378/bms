@@ -5,12 +5,12 @@
       <template v-if="me.childrens && me.childrens.length">
         <MenuGroup :key="me.id" title="me.name">
           <template v-for="da in me.childrens">
-            <MenuItem :key="da.id" name="da.id">{{da.name}}</MenuItem>
+            <MenuItem :key="da.id" :name="da.id">{{ da.name }}</MenuItem>
           </template>
         </MenuGroup>
       </template>
       <template v-else>
-        <MenuItem :key="me.id" name="me.id">{{me.name}}</MenuItem>
+        <MenuItem :key="me.id" :name="me.id">{{ me.name }}</MenuItem>
       </template>
     </template>
   </Menu>
