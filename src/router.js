@@ -8,8 +8,13 @@ const routes = [
     path: '/',
     title: '主页',
     component: () => import('@routes/index.vue'),
-    // children: [
-    // ],
+    children: [
+      {
+        path: '/book',
+        title: '图书列表',
+        component: () => import('@routes/book/index'),
+      },
+    ],
   },
 ]
 
