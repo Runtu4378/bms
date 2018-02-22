@@ -18,7 +18,7 @@ module.exports = {
       loader: 'babel-loader',
       options: {
         presets: [
-          ['env', { modules: false }],
+          ['env'],
           'stage-0',
         ],
         'plugins': [

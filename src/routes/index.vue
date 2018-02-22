@@ -80,3 +80,12 @@
     }
   }
 </style>
+
+<style lang="less">
+  .pageContentCon {
+    margin: 10px 16px;
+    padding: 10px 16px;
+    background-color: #fff;
+  }
+</style>
+

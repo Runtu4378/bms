@@ -4,5 +4,5 @@ module.exports = {
   path: config.buildDir,
   filename: '[name].js',
   chunkFilename: '[id].chunk.js',
-  publicPath: '/'
+  publicPath: '/',
 }

@@ -34,5 +34,8 @@ module.exports = {
     'no-console':  switcher,
     'no-debugger': switcher,
     'comma-dangle': ['error', 'always-multiline'],
+    "indent": [2, 2, {
+      "SwitchCase": 1
+    }], // 缩进为2
   },
 }

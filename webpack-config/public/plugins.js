@@ -8,10 +8,10 @@ const config = require('../cofig')
 module.exports = [
   new webpack.optimize.CommonsChunkPlugin({
     name: 'shared',
-    filename: 'shared.js'
+    filename: 'shared.js',
   }),
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
   }),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin(),

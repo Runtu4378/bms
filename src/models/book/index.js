@@ -4,15 +4,13 @@ import * as getters from './getters'
 import * as actions from './actions'
 import * as mutations from './mutations'
 
-const { defaultPage } = config
+const { defaultPage, defaultPageSize } = config
 
 const state = {
-  data: 'test',
   list: [],
   pagination: {
-    showSizeChanger: true,
-    showTotal: total => `共 ${total} 条`,
     current: defaultPage,
+    pageSize: defaultPageSize,
     total: null,
   },
 }
