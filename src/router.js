@@ -16,6 +16,11 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/login',
+    name: '登录',
+    component: () => import('@routes/login/index'),
+  },
 ]
 
 const router = new VueRouter({

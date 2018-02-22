@@ -3,9 +3,18 @@
     <Header class="header">
       <div class="title">图书管理系统</div>
       <div class="middle"></div>
-      <div class="userInfo">
+      <Dropdown class="userInfo" v-if="login" @on-click="dealDropDownClick">
+        <div class="username">
+          {{ user.username }}
+          <Icon type="arrow-down-b"></Icon>
+        </div>
+        <DropdownMenu slot="list">
+          <DropdownItem name="logout">登出</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+      <!-- <div class="userInfo">
         闰土
-      </div>
+      </div> -->
     </Header>
     <Content class="content">
       <Sider class="menu"><Menu /></Sider>
@@ -20,15 +29,38 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex'
+  import { mapState, mapGetters, mapActions } from 'vuex'
   import Menu from './layout/menu'
 
   export default {
     components: { Menu },
-    computed: mapGetters([
-    ]),
-    methods: mapActions([
-    ]),
+    created: function () {
+      // 检查登录态
+      if (!this.login) {
+        this.checkLogin(this.$router)
+      }
+    },
+    computed: {
+      ...mapState({
+        login: state => state.login.login,
+        user: state => state.login.user,
+      }),
+      ...mapGetters([]),
+    },
+    methods: {
+      ...mapActions({
+        checkLogin: 'login/checkLogin',
+        logout: 'login/logout',
+      }),
+      dealDropDownClick: function (name) {
+        if (name === 'logout') {
+          this.logout({
+            uid: this.user.id,
+            router: this.$router,
+          })
+        }
+      },
+    },
   }
 </script>
 
@@ -64,6 +96,13 @@
       margin-left: 10px;
       text-align: right;
       flex-shrink: 0;
+      color: #fff;
+
+      .username {
+        &:hover {
+          color: #ccc;
+        }
+      }
     }
   }
 

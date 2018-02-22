@@ -5,6 +5,8 @@ module.exports = {
   defaultPageSize: 10,    // 默认每页大小
   // 接口地址
   api: {
+    login: '/user/login',
+    logout: '/user/logout',
     book: '/book',
   },
 }
