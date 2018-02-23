@@ -13,9 +13,13 @@ const state = {
     pageSize: defaultPageSize,
     total: null,
   },
+  // 编辑弹窗
   modalEditVisible: false,
   modalEditTitle: '',
   modalEditItem: {},
+  // 详情弹窗
+  modalViewVisible: false,
+  modalViewItem: {},
 }
 
 const store = {

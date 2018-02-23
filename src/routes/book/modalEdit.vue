@@ -35,11 +35,14 @@
       'onSubmit',
     ],
     data: function () {
+      const { editType, ...formData } = this.item
       return {
+        editType,
         formInline: {
           code: '',
           name: '',
           description: '',
+          ...formData,
         },
         ruleInline: {
           code: [{ required: true, message: '请输入图书编码' }],

@@ -1,6 +1,6 @@
 <template>
   <div class="pageContentCon">
-    <div class="btn-lab">
+    <div class="btn-lab" v-if="userType === '00'">
       <Button type="primary" @click="modalEditShow('添加图书')">添加图书</Button>
     </div>
     <div class="mine-table">
@@ -24,20 +24,26 @@
       :onCancel="modalEditHide"
       :onSubmit="add"
     />
+    <ModalView
+      :visible="modalViewVisible"
+      :item="modalViewItem"
+      :onCancel="modalViewHide"
+    />
   </div>
 </template>
 
 <script>
   import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
   import ModalEdit from './modalEdit'
+  import ModalView from './modalView'
 
   export default {
-    components: { ModalEdit },
+    components: { ModalEdit, ModalView },
     mounted: function () {
       // 初始化生命周期
       this.query({}) // 获取列表数据
     },
-    data: () => {
+    data: function () {
       return {
         columns: [
           {
@@ -52,16 +58,48 @@
             key: 'description',
             title: '描述',
           },
+          {
+            key: 'action',
+            title: '操作',
+            render: (h, column) => {
+              const { row } = column
+              const children = [
+                h('Button', {
+                  style: {
+                    'margin-right': '8px',
+                  },
+                  on: {
+                    click: () => this.modalViewShow(row),
+                  },
+                }, '详情'),
+              ]
+              if (this.userType === '00') {
+                children.push(h('Button', {
+                  props: {},
+                }, '编辑'))
+              } else if (this.userType === '01') {
+                children.push(h('Button', {
+                  props: {},
+                }, '借阅'))
+              }
+              return h('div', children)
+            },
+          },
         ],
       }
     },
     computed: {
+      ...mapState('login', {
+        userType: state => state.user.type,
+      }),
       ...mapState('book', [
+        'list',
+        'pagination',
         'modalEditVisible',
         'modalEditTitle',
         'modalEditItem',
-        'list',
-        'pagination',
+        'modalViewVisible',
+        'modalViewItem',
       ]),
       ...mapGetters('book', {}),
     },
@@ -73,13 +111,9 @@
       ...mapMutations('book', [
         'modalEditShow',
         'modalEditHide',
+        'modalViewShow',
+        'modalViewHide',
       ]),
-      hideAdd: function () {
-        console.log('hide')
-        this.modalEditVisible = false
-        this.modalEditTitle = ''
-        this.modalEditItem = {}
-      },
       pageChange: function (page) {
         console.log(page)
       },

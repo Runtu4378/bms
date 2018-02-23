@@ -20,3 +20,13 @@ export const modalEditHide = (state, payload) => {
   state.modalEditTitle = ''
   state.modalEditItem = {}
 }
+
+export const modalViewShow = (state, payload) => {
+  state.modalViewVisible = true
+  state.modalViewItem = payload
+}
+
+export const modalViewHide = (state, payload) => {
+  state.modalViewVisible = false
+  state.modalViewItem = {}
+}
