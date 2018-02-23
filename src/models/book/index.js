@@ -13,6 +13,9 @@ const state = {
     pageSize: defaultPageSize,
     total: null,
   },
+  modalEditVisible: false,
+  modalEditTitle: '',
+  modalEditItem: {},
 }
 
 const store = {

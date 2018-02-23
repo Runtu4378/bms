@@ -8,3 +8,15 @@ export const querySuccess = (state, payload) => {
     total,
   }
 }
+
+export const modalEditShow = (state, payload) => {
+  state.modalEditVisible = true
+  state.modalEditTitle = payload
+  state.modalEditItem = { editType: 'create' }
+}
+
+export const modalEditHide = (state, payload) => {
+  state.modalEditVisible = false
+  state.modalEditTitle = ''
+  state.modalEditItem = {}
+}

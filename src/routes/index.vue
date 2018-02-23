@@ -12,9 +12,6 @@
           <DropdownItem name="logout">登出</DropdownItem>
         </DropdownMenu>
       </Dropdown>
-      <!-- <div class="userInfo">
-        闰土
-      </div> -->
     </Header>
     <Content class="content">
       <Sider class="menu"><Menu /></Sider>

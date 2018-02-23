@@ -11,3 +11,11 @@ export async function query (params) {
   })
   return res
 }
+
+export async function add (params) {
+  return await request({
+    url: book,
+    method: 'post',
+    data: params,
+  })
+}
