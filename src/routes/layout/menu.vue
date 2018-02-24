@@ -48,7 +48,7 @@
             id: 1,
             name: '待还列表',
             icon: 'reply',
-            path: '/',
+            path: '/borrow',
             childrnes: [],
           },
         ],

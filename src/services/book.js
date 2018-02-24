@@ -2,7 +2,7 @@ import { request, config } from '@utils'
 import { stringify } from 'qs'
 
 const { api } = config
-const { book } = api
+const { book, borrow } = api
 
 export async function query (params) {
   const res = await request({
@@ -26,5 +26,13 @@ export async function edit (params) {
     url: `${book}/${id}`,
     method: 'put',
     data: payload,
+  })
+}
+
+export async function borrowFuc (params) {
+  return await request({
+    url: borrow,
+    method: 'post',
+    data: params,
   })
 }

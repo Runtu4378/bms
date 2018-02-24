@@ -14,6 +14,11 @@ const routes = [
         name: '图书列表',
         component: () => import('@routes/book/index'),
       },
+      {
+        path: '/borrow',
+        name: '待还列表',
+        component: () => import('@routes/borrow/index'),
+      },
     ],
   },
   {

@@ -61,10 +61,19 @@
             title: '描述',
           },
           {
+            key: 'isBorrow',
+            title: '借阅情况',
+            render: (h, column) => {
+              const { isBorrow } = column.row
+              return h('span', isBorrow === '00' ? '未借' : '被借')
+            },
+          },
+          {
             key: 'action',
             title: '操作',
             render: (h, column) => {
               const { row } = column
+              const { isBorrow } = row
               const children = [
                 h('Button', {
                   style: {
@@ -87,7 +96,13 @@
                 }, '编辑'))
               } else if (this.userType === '01') {
                 children.push(h('Button', {
-                  props: {},
+                  props: {
+                    type: 'primary',
+                    disabled: isBorrow === '01',
+                  },
+                  on: {
+                    click: () => this.askBorrow(row),
+                  },
                 }, '借阅'))
               }
               return h('div', children)
@@ -117,6 +132,7 @@
         'query',
         'add',
         'edit',
+        'borrow',
       ]),
       ...mapMutations('book', [
         'modalEditShow',
@@ -127,6 +143,16 @@
       ]),
       pageChange: function (page) {
         console.log(page)
+      },
+      askBorrow: function (obj) {
+        const { id, name } = obj
+        this.$Modal.confirm({
+          title: '借阅',
+          content: `是否确认借阅${name}?`,
+          onOk: () => {
+            this.borrow(id)
+          },
+        })
       },
     },
   }

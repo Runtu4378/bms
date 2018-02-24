@@ -8,5 +8,7 @@ module.exports = {
     login: '/user/login',
     logout: '/user/logout',
     book: '/book',
+    borrow: '/borrow',
+    borrowUser: '/borrow/user',
   },
 }

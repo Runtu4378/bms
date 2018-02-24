@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import createLogger from 'vuex/dist/logger'
 import login from './login'
 import book from './book'
+import borrow from './borrow'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ const store = new Vuex.Store({
   modules: {
     login,
     book,
+    borrow,
   },
   strict: debug,
   plugins: debug ? [createLogger()] : [],

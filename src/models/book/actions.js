@@ -1,5 +1,5 @@
 import config from '@utils/config'
-import { query as QUERY, add as ADD, edit as EDIT } from '@services/book'
+import { query as QUERY, add as ADD, edit as EDIT, borrowFuc as BORROW } from '@services/book'
 
 const { defaultPage, defaultPageSize } = config
 
@@ -41,6 +41,17 @@ export const edit = async ({ dispatch, commit }, payload) => {
   if (success) {
     commit('modalEditHide')
     console.log(data)
+    dispatch('query', {})
+  } else {
+    throw new Error(message)
+  }
+}
+
+// 借书
+export const borrow = async ({ dispatch, commit, rootState }, payload) => {
+  const { id: uid } = rootState.login.user
+  const { success, message } = await BORROW({ uid, bid: payload })
+  if (success) {
     dispatch('query', {})
   } else {
     throw new Error(message)
