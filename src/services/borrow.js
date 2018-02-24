@@ -17,3 +17,12 @@ export async function queryUser (params) {
     method: 'get',
   })
 }
+
+export async function returnFuc (params) {
+  const { id, bid } = params
+  return await request({
+    url: `${borrow}/${id}`,
+    method: 'post',
+    data: { bid },
+  })
+}

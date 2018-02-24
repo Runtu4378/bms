@@ -26,8 +26,19 @@
       this.query({}) // 获取列表数据
     },
     data: function () {
-      return {
-        columns: [
+      return {}
+    },
+    computed: {
+      ...mapState('login', {
+        userType: state => state.user.type,
+      }),
+      ...mapState('borrow', [
+        'list',
+        'pagination',
+      ]),
+      columns: function () {
+        console.log(this)
+        let res = [
           {
             key: 'code',
             title: '图书编码',
@@ -48,24 +59,47 @@
               return h('span', date)
             },
           },
-        ],
-      }
-    },
-    computed: {
-      ...mapState('login', {
-        userType: state => state.user.type,
-      }),
-      ...mapState('borrow', [
-        'list',
-        'pagination',
-      ]),
+        ]
+        if (this.userType === '01') {
+          res = res.concat([
+            {
+              key: 'action',
+              title: '操作',
+              render: (h, column) => {
+                const { row } = column
+                const children = [
+                  h('Button', {
+                    props: { type: 'primary' },
+                    on: {
+                      click: () => this.returnAsk(row),
+                    },
+                  }, '还书'),
+                ]
+                return h('div', children)
+              },
+            },
+          ])
+        }
+        return res
+      },
     },
     methods: {
       ...mapActions('borrow', [
         'query',
+        'returnBook',
       ]),
       pageChange: function (page) {
         console.log(page)
+      },
+      returnAsk: function (obj) {
+        const { id, bid, name } = obj
+        this.$Modal.confirm({
+          title: '还书',
+          content: `是否确认归还${name}?`,
+          onOk: () => {
+            this.returnBook({ id, bid })
+          },
+        })
       },
     },
   }

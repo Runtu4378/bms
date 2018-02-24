@@ -1,5 +1,5 @@
 import config from '@utils/config'
-import { queryAll as QUERYALL, queryUser as QUERYUSER, borrowFuc as BORROW } from '@services/borrow'
+import { queryAll as QUERYALL, queryUser as QUERYUSER, returnFuc as RETURN } from '@services/borrow'
 
 const { defaultPage, defaultPageSize } = config
 
@@ -54,9 +54,8 @@ export const queryUser = async ({ dispatch, commit, rootState }, payload) => {
 }
 
 // 借书
-export const borrow = async ({ dispatch, commit, rootState }, payload) => {
-  const { id: uid } = rootState.login.user
-  const { success, message } = await BORROW({ uid, bid: payload })
+export const returnBook = async ({ dispatch, commit }, payload) => {
+  const { success, message } = await RETURN(payload)
   if (success) {
     dispatch('query', {})
   } else {
