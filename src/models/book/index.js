@@ -16,6 +16,7 @@ const state = {
   // 编辑弹窗
   modalEditVisible: false,
   modalEditTitle: '',
+  modalEditType: '',
   modalEditItem: {},
   // 详情弹窗
   modalViewVisible: false,

@@ -20,9 +20,11 @@
     <ModalEdit
       :visible="modalEditVisible"
       :title="modalEditTitle"
+      :editType="modalEditType"
       :item="modalEditItem"
       :onCancel="modalEditHide"
-      :onSubmit="add"
+      :onCreate="add"
+      :onEdit="edit"
     />
     <ModalView
       :visible="modalViewVisible"
@@ -75,7 +77,13 @@
               ]
               if (this.userType === '00') {
                 children.push(h('Button', {
-                  props: {},
+                  props: { type: 'primary' },
+                  on: {
+                    click: () => this.modalEditEdit({
+                      title: '编辑图书',
+                      ...row,
+                    }),
+                  },
                 }, '编辑'))
               } else if (this.userType === '01') {
                 children.push(h('Button', {
@@ -97,6 +105,7 @@
         'pagination',
         'modalEditVisible',
         'modalEditTitle',
+        'modalEditType',
         'modalEditItem',
         'modalViewVisible',
         'modalViewItem',
@@ -107,9 +116,11 @@
       ...mapActions('book', [
         'query',
         'add',
+        'edit',
       ]),
       ...mapMutations('book', [
         'modalEditShow',
+        'modalEditEdit',
         'modalEditHide',
         'modalViewShow',
         'modalViewHide',

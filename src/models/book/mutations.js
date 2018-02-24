@@ -12,12 +12,22 @@ export const querySuccess = (state, payload) => {
 export const modalEditShow = (state, payload) => {
   state.modalEditVisible = true
   state.modalEditTitle = payload
-  state.modalEditItem = { editType: 'create' }
+  state.modalEditType = 'create'
+  state.modalEditItem = { }
+}
+
+export const modalEditEdit = (state, payload) => {
+  const { title, ...detail } = payload
+  state.modalEditVisible = true
+  state.modalEditTitle = title
+  state.modalEditType = 'edit'
+  state.modalEditItem = { ...detail }
 }
 
 export const modalEditHide = (state, payload) => {
   state.modalEditVisible = false
   state.modalEditTitle = ''
+  state.modalEditType = ''
   state.modalEditItem = {}
 }
 

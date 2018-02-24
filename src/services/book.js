@@ -19,3 +19,12 @@ export async function add (params) {
     data: params,
   })
 }
+
+export async function edit (params) {
+  const { id, ...payload } = params
+  return await request({
+    url: `${book}/${id}`,
+    method: 'put',
+    data: payload,
+  })
+}

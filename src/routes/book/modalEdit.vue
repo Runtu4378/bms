@@ -7,8 +7,11 @@
   >
     <div>
       <Form ref="formInline" :model="formInline" :rules="ruleInline" :label-width="100">
-        <FormItem label="图书编码" prop="code">
+        <FormItem v-if="editType === 'create'" label="图书编码" prop="code">
           <Input type="text" v-model="formInline.code" placeholder="图书编码" />
+        </FormItem>
+        <FormItem v-if="editType === 'edit'" label="图书编码" prop="code">
+          <span>{{formInline.code}}</span>
         </FormItem>
         <FormItem label="图书名称" prop="name">
           <Input type="text" v-model="formInline.name" placeholder="图书名称" />
@@ -30,19 +33,18 @@
     props: [
       'visible',
       'title',
+      'editType',
       'item',
       'onCancel',
-      'onSubmit',
+      'onCreate',
+      'onEdit',
     ],
     data: function () {
-      const { editType, ...formData } = this.item
       return {
-        editType,
         formInline: {
           code: '',
           name: '',
           description: '',
-          ...formData,
         },
         ruleInline: {
           code: [{ required: true, message: '请输入图书编码' }],
@@ -51,12 +53,21 @@
         },
       }
     },
+    watch: {
+      item: function (val) {
+        this.formInline = { ...val }
+      },
+    },
     methods: {
       submit: function () {
         this.$refs['formInline'].validate((valid) => {
           if (valid) {
-            this.$Message.success('Success!')
-            this.onSubmit(this.formInline)
+            // this.$Message.success('Success!')
+            if (this.editType === 'create') {
+              this.onCreate(this.formInline)
+            } else if (this.editType === 'edit') {
+              this.onEdit(this.formInline)
+            }
           } else {
             this.$Message.error('Fail!')
           }

@@ -1,5 +1,5 @@
 import config from '@utils/config'
-import { query as QUERY, add as ADD } from '@services/book'
+import { query as QUERY, add as ADD, edit as EDIT } from '@services/book'
 
 const { defaultPage, defaultPageSize } = config
 
@@ -26,6 +26,18 @@ export const query = async ({ dispatch, commit, state }, payload) => {
 // 新增图书
 export const add = async ({ dispatch, commit }, payload) => {
   const { success, data, message } = await ADD(payload)
+  if (success) {
+    commit('modalEditHide')
+    console.log(data)
+    dispatch('query', {})
+  } else {
+    throw new Error(message)
+  }
+}
+
+// 编辑图书
+export const edit = async ({ dispatch, commit }, payload) => {
+  const { success, data, message } = await EDIT(payload)
   if (success) {
     commit('modalEditHide')
     console.log(data)
